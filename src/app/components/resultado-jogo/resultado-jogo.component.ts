@@ -14,12 +14,14 @@ export class ResultadoJogoComponent implements OnInit {
 
   pares = 0;
   impares = 0;
+  soma = 0;
 
   ordernacao: 'crescente' | 'sorteio' = 'crescente';
 
   ngOnInit(): void {
     this.pares = this.resultado!.dezenas.filter((numero) => Number(numero) % 2 === 0).length;
     this.impares = this.resultado!.dezenas.length - this.pares;
+    this.soma = this.resultado!.dezenas.reduce((soma, valor) => soma + Number(valor), 0);
   }
 
   alterarOrdenacao(valor: 'crescente' | 'sorteio') {

@@ -4,6 +4,7 @@
       <span>Concurso: <span>{{ resultado!.concurso }}</span></span>
       <span>Pares: <span>{{ pares }}</span></span>
       <span>Impares: <span>{{ impares }}</span></span>
+      <span>Soma: <span>{{ soma }}</span></span>
     </div>
     <div class="ordenacao">
       <span
@@ -27,7 +28,7 @@
 <ng-template #crescente>
   <div class="valores">
     @for (dezena of resultado!.dezenas; track $index) {
-    <span class="valor"> {{ dezena }}</span>
+    <span class="esfera-numero"> {{ dezena }}</span>
     }
   </div>
 </ng-template>
@@ -35,7 +36,7 @@
 <ng-template #sorteio>
   <div class="valores">
     @for (dezena of resultado!.dezenasOrdemSorteio; track $index) {
-    <span class="valor"> {{ dezena }}</span>
+    <span class="esfera-numero"> {{ dezena }}</span>
     }
   </div>
 </ng-template>

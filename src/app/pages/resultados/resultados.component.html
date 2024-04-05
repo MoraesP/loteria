@@ -3,10 +3,49 @@
     <span class="titulo">Resultados</span>
   </div>
   <div class="body">
-    @for (resultado of ultimosResultados; track $index) {
+    @for (resultado of paginasDeResultados[paginaAtual -1]; track $index) {
     <div class="mb-15">
       <app-resultado-jogo [resultado]="resultado"></app-resultado-jogo>
     </div>
     }
+    <div class="paginacao">
+      <mat-icon
+        class="botao-pagina"
+        fontIcon="arrow_back"
+        (click)="voltarPagina()"
+      ></mat-icon>
+      <span
+        *ngIf="paginaAtual > 2"
+        class="primeira-pagina"
+        (click)="paginaAtual = 1"
+        >1</span
+      >
+      <span *ngIf="paginaAtual > 2" class="mais">...</span>
+      <span
+        *ngIf="paginaAtual !== 1"
+        class="pagina-anterior"
+        (click)="paginaAtual = paginaAtual - 1"
+        >{{ paginaAtual - 1 }}</span
+      >
+      <span class="pagina-atual">{{ paginaAtual }}</span>
+      <span
+        *ngIf="paginaAtual < numeroDePaginas - 1"
+        class="proxima-pagina"
+        (click)="paginaAtual = paginaAtual + 1"
+        >{{ paginaAtual + 1 }}</span
+      >
+      <span *ngIf="paginaAtual < numeroDePaginas - 1" class="mais">...</span>
+      <span
+        *ngIf="paginaAtual !== numeroDePaginas"
+        class="ultima-pagina"
+        (click)="paginaAtual = numeroDePaginas"
+        >{{ numeroDePaginas }}</span
+      >
+      <mat-icon
+        class="botao-pagina"
+        fontIcon="arrow_forward"
+        (click)="proximaPagina()"
+      ></mat-icon>
+    </div>
   </div>
 </div>

@@ -7,6 +7,8 @@
     .dados {
       gap: 10px;
       display: flex;
+      text-wrap: nowrap;
+
       > span {
         font-size: 12px;
         > span {
@@ -19,7 +21,9 @@
     .ordenacao {
       gap: 10px;
       display: flex;
-      span {
+      text-wrap: nowrap;
+
+      > span {
         font-size: 12px;
         cursor: pointer;
         &:hover {
@@ -33,12 +37,22 @@
   }
 
   .valores {
-    height: 30px;
     gap: 10px;
     display: flex;
-    padding: 0 15px;
+    padding: 5px 15px;
     align-items: center;
     border-radius: 15px;
     background-color: white;
+    border: 1px solid black;
+
+    .esfera-numero {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100%;
+      background: radial-gradient(circle at 10px 10px, white, gray);
+    }
   }
 }
