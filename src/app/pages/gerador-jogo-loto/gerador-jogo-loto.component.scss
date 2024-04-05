@@ -1,0 +1,58 @@
+.gerador {
+  width: 100%;
+  padding: 30px;
+}
+
+.cartela {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  width: 300px;
+  border: 1px solid black;
+  padding: 15px;
+  border-radius: 15px;
+  justify-items: center;
+}
+
+.numeros-gerados {
+  display: flex;
+  gap: 15px;
+  padding: 0 30px;
+
+  > .bola {
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid black;
+  }
+}
+
+.bolinha {
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid black;
+  cursor: pointer;
+  &:hover {
+    background-color: gray;
+  }
+  &.selecionado {
+    background-color: red;
+  }
+  &.desabilitado {
+    pointer-events: none;
+  }
+}

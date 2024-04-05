@@ -1,0 +1,26 @@
+<div class="gerador">
+  <span>Selecione até 5 números fixos:</span>
+  <div class="cartela">
+    @for (item of todosOsNumero; track $index) {
+    <div
+      class="bolinha"
+      [ngClass]="{
+        selecionado: item.selecionado,
+        desabilitado: todosNumerosSelecionados
+      }"
+      (click)="selecionarNumeroFixo(item)"
+    >
+      {{ item.numero }}
+    </div>
+    }
+  </div>
+  <button mat-flat-button (click)="gerarNumeros()">Gerar</button>
+</div>
+
+@if (numerosGerados.length > 0) {
+<div class="numeros-gerados">
+  @for (numero of numerosGerados; track $index) {
+  <div class="bola">{{ numero }}</div>
+  }
+</div>
+}

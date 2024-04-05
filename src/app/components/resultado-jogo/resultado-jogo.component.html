@@ -1,0 +1,41 @@
+<div class="resultado">
+  <div class="informacoes">
+    <div class="dados">
+      <span>Concurso: <span>{{ resultado!.concurso }}</span></span>
+      <span>Pares: <span>{{ pares }}</span></span>
+      <span>Impares: <span>{{ impares }}</span></span>
+    </div>
+    <div class="ordenacao">
+      <span
+        [ngClass]="{ selecionado: ordernacao === 'crescente' }"
+        (click)="alterarOrdenacao('crescente')"
+        >Crescente</span
+      >
+      <div>|</div>
+      <span
+        [ngClass]="{ selecionado: ordernacao === 'sorteio' }"
+        (click)="alterarOrdenacao('sorteio')"
+        >Por sorteio</span
+      >
+    </div>
+  </div>
+  <ng-container
+    *ngIf="ordernacao === 'crescente'; then crescente; else sorteio"
+  ></ng-container>
+</div>
+
+<ng-template #crescente>
+  <div class="valores">
+    @for (dezena of resultado!.dezenas; track $index) {
+    <span class="valor"> {{ dezena }}</span>
+    }
+  </div>
+</ng-template>
+
+<ng-template #sorteio>
+  <div class="valores">
+    @for (dezena of resultado!.dezenasOrdemSorteio; track $index) {
+    <span class="valor"> {{ dezena }}</span>
+    }
+  </div>
+</ng-template>

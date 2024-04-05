@@ -1,0 +1,44 @@
+.resultado {
+  .informacoes {
+    display: flex;
+    padding: 0 10px;
+    justify-content: space-between;
+
+    .dados {
+      gap: 10px;
+      display: flex;
+      > span {
+        font-size: 12px;
+        > span {
+          font-size: 12px;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .ordenacao {
+      gap: 10px;
+      display: flex;
+      span {
+        font-size: 12px;
+        cursor: pointer;
+        &:hover {
+          color: red;
+        }
+        &.selecionado {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .valores {
+    height: 30px;
+    gap: 10px;
+    display: flex;
+    padding: 0 15px;
+    align-items: center;
+    border-radius: 15px;
+    background-color: white;
+  }
+}

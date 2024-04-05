@@ -1,0 +1,12 @@
+<div class="conteudo">
+  <div class="header">
+    <span class="titulo">Resultados</span>
+  </div>
+  <div class="body">
+    @for (resultado of ultimosResultados; track $index) {
+    <div class="mb-15">
+      <app-resultado-jogo [resultado]="resultado"></app-resultado-jogo>
+    </div>
+    }
+  </div>
+</div>
