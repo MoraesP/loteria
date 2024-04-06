@@ -4,11 +4,12 @@ import { ResultadoJogoComponent } from '../../components/resultado-jogo/resultad
 import { BuscadorService } from '../../services/buscador.service';
 import { ResultadoJogo } from '../../models/resultado';
 import { MatIconModule } from '@angular/material/icon';
+import { ResultadoJogoModule } from '../../components/resultado-jogo/resultado-jogo.module';
 
 @Component({
   selector: 'app-resultados',
   standalone: true,
-  imports: [CommonModule, ResultadoJogoComponent, MatIconModule],
+  imports: [CommonModule, MatIconModule, ResultadoJogoModule],
   templateUrl: './resultados.component.html',
   styleUrl: './resultados.component.scss',
 })

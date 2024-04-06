@@ -1,10 +1,18 @@
 <div class="resultado">
   <div class="informacoes">
     <div class="dados">
-      <span>Concurso: <span>{{ resultado!.concurso }}</span></span>
-      <span>Pares: <span>{{ pares }}</span></span>
-      <span>Impares: <span>{{ impares }}</span></span>
-      <span>Soma: <span>{{ soma }}</span></span>
+      <span
+        >Concurso: <span>{{ resultado!.concurso }}</span></span
+      >
+      <span
+        >Pares: <span>{{ pares }}</span></span
+      >
+      <span
+        >Impares: <span>{{ impares }}</span></span
+      >
+      <span
+        >Soma: <span>{{ soma }}</span></span
+      >
     </div>
     <div class="ordenacao">
       <span
@@ -20,23 +28,44 @@
       >
     </div>
   </div>
-  <ng-container
-    *ngIf="ordernacao === 'crescente'; then crescente; else sorteio"
-  ></ng-container>
+  <ng-container [ngTemplateOutlet]="valoresJogo"></ng-container>
 </div>
 
-<ng-template #crescente>
-  <div class="valores">
-    @for (dezena of resultado!.dezenas; track $index) {
-    <span class="esfera-numero"> {{ dezena }}</span>
-    }
+<ng-template #valoresJogo>
+  <div class="d-flex align-items-center">
+    <div
+      class="valores"
+      [ngClass]="{ 'teve-vencedor': resultado!.premiacoes[0].ganhadores > 0 }"
+    >
+      @for (dezena of resultadoJogo; track $index) {
+      <span class="esfera-numero"> {{ dezena }}</span>
+      }
+    </div>
+    <mat-icon
+      fontIcon="add_circle"
+      [tooltip]="'Mais informações'"
+      placement="left"
+      class="cursor-pointer"
+      (click)="abrirModal(modalTemplate, $event)"
+    ></mat-icon>
   </div>
 </ng-template>
 
-<ng-template #sorteio>
-  <div class="valores">
-    @for (dezena of resultado!.dezenasOrdemSorteio; track $index) {
-    <span class="esfera-numero"> {{ dezena }}</span>
+<ng-template #modalTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Mais informações</h4>
+    <mat-icon
+      fontIcon="close"
+      [tooltip]="'Fechar'"
+      placement="top"
+      class="cursor-pointer"
+      (click)="fecharModal()"
+    ></mat-icon>
+  </div>
+  <div class="modal-body">
+    @for (premiacao of resultado!.premiacoes; track $index) {
+    <p>Vencedores ({{ premiacao.descricao }}): {{ premiacao.ganhadores }}</p>
+    <p>Valor do premio: R$ {{ premiacao.valorPremio }}</p>
     }
   </div>
 </ng-template>
