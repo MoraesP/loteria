@@ -46,14 +46,19 @@
       [tooltip]="'Mais informações'"
       placement="left"
       class="cursor-pointer"
-      (click)="abrirModal(modalTemplate, $event)"
+      (click)="
+        abrirModal($event, modalTemplate, 'modal-largo', 'mais-informacoes')
+      "
     ></mat-icon>
   </div>
 </ng-template>
 
 <ng-template #modalTemplate>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Mais informações</h4>
+    <span class="titulo-modal"
+      >Resultado do concurso {{ resultado?.concurso }} corrido dia
+      {{ resultado?.data }}</span
+    >
     <mat-icon
       fontIcon="close"
       [tooltip]="'Fechar'"
@@ -63,9 +68,36 @@
     ></mat-icon>
   </div>
   <div class="modal-body">
-    @for (premiacao of resultado!.premiacoes; track $index) {
-    <p>Vencedores ({{ premiacao.descricao }}): {{ premiacao.ganhadores }}</p>
-    <p>Valor do premio: R$ {{ premiacao.valorPremio }}</p>
-    }
+    <div class="acertos">
+      <span class="grid-header">Premiação</span>
+      <span class="grid-header">N. ganhadores</span>
+      <span class="grid-header">Valor do premio</span>
+      @for (premiacao of resultado!.premiacoes; track $index) {
+      <span class="grid-body">{{ premiacao.descricao }}</span>
+      <span class="grid-body">{{ premiacao.ganhadores }}</span>
+      <span class="grid-body">R$ {{ premiacao.valorPremio }}</span>
+      }
+    </div>
+    <div class="d-flex mt-30">
+      <div class="valores mais">
+        @for (dezena of todosOsValoresString; track $index) {
+        <span
+          class="esfera-numero"
+          [ngClass]="{ sorteado: resultadoJogo.includes(dezena) }"
+        >
+          {{ dezena }}</span
+        >
+        }
+      </div>
+      <div class="proximo">
+        <span class="mt-15"
+          ><strong>Estimativa do próximo Prêmio:</strong> R$
+          {{ resultado?.valorEstimadoProximoConcurso }}</span
+        >
+        <span class="mt-15"
+          >Próximo concurso, em {{ resultado?.dataProximoConcurso }}</span
+        >
+      </div>
+    </div>
   </div>
 </ng-template>

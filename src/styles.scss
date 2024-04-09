@@ -66,9 +66,11 @@ body {
   &-10 {
     margin-top: 10px !important;
   }
-
   &-15 {
     margin-top: 15px !important;
+  }
+  &-30 {
+    margin-top: 30px !important;
   }
 }
 
@@ -87,6 +89,11 @@ body {
 .gap {
   &-10 {
     gap: 10px;
+  }
+}
+.modal {
+  &-largo {
+    max-width: calc(100% - 100px);
   }
 }
 

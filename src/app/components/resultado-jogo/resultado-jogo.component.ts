@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BsModalRef, BsModalService, ModalModule, ModalOptions } from 'ngx-bootstrap/modal';
+import {
+  BsModalRef,
+  BsModalService,
+  ModalModule,
+  ModalOptions,
+} from 'ngx-bootstrap/modal';
 import { ResultadoJogo } from '../../models/resultado';
 
 @Component({
@@ -17,6 +22,33 @@ export class ResultadoJogoComponent implements OnInit {
   soma = 0;
 
   ordernacao: 'crescente' | 'sorteio' = 'crescente';
+  todosOsValoresString = [
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
+  ];
 
   modalRef: BsModalRef | undefined;
 
@@ -43,12 +75,22 @@ export class ResultadoJogoComponent implements OnInit {
       : this.resultado!.dezenasOrdemSorteio;
   }
 
-  abrirModal(template: TemplateRef<any>, $event: Event) {
-    $event.preventDefault();
+  abrirModal(
+    event: Event,
+    template: TemplateRef<any>,
+    tamanho: string,
+    classe: string
+  ) {
+    event.preventDefault();
+
     const config: ModalOptions<any> = {
       ignoreBackdropClick: true,
     };
+
     this.modalRef = this.modalService.show(template, config);
+    document
+      .querySelector<HTMLElement>('.modal-dialog')
+      ?.classList.add(tamanho, classe);
     console.log(this.resultado);
   }
 

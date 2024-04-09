@@ -35,29 +35,73 @@
       }
     }
   }
+}
 
-  .valores {
-    gap: 10px;
-    width: 100%;
+.valores {
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  padding: 5px 15px;
+  align-items: center;
+  margin-right: 15px;
+  border-radius: 15px;
+  background-color: white;
+  border: 1px solid black;
+
+  &.teve-vencedor {
+    border-color: greenyellow;
+  }
+  &.mais {
+    width: max-content;
+    display: grid;
+    gap: 15px;
+    padding: 15px;
+    grid-template-columns: repeat(5, 1fr);
+    border-radius: 0px;
+    box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  .esfera-numero {
+    width: 30px;
+    height: 30px;
     display: flex;
-    padding: 5px 15px;
     align-items: center;
-    margin-right: 15px;
-    border-radius: 15px;
-    background-color: white;
-    border: 1px solid black;
-    &.teve-vencedor {
-      border-color: greenyellow;
-    }
-
-    .esfera-numero {
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 100%;
-      background: radial-gradient(circle at 10px 10px, white, gray);
+    justify-content: center;
+    border-radius: 100%;
+    background: radial-gradient(circle at 10px 10px, white, gray);
+    &.sorteado {
+      background: radial-gradient(circle at 10px 10px, white, green);
     }
   }
+}
+
+.titulo-modal {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.acertos {
+  display: grid;
+  grid-auto-rows: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid black;
+  border-radius: 15px;
+
+  .grid-header {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .grid-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid black;
+  }
+}
+
+.proximo {
+  display: flex;
+  flex-direction: column;
 }
