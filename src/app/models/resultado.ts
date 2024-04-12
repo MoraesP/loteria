@@ -26,3 +26,10 @@ export interface ResultadoJogo {
   valorAcumuladoProximoConcurso: number;
   valorEstimadoProximoConcurso: number;
 }
+
+export enum StatusBusca {
+  CARREGANDO,
+  CONCLUIDO,
+  SEM_RESULTADOS,
+  ERROR,
+}

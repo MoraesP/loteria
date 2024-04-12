@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ResultadoJogoComponent } from '../../components/resultado-jogo/resultado-jogo.component';
 import { BuscadorService } from '../../services/buscador.service';
-import { ResultadoJogo } from '../../models/resultado';
+import { ResultadoJogo, StatusBusca } from '../../models/resultado';
 import { MatIconModule } from '@angular/material/icon';
 import { ResultadoJogoModule } from '../../components/resultado-jogo/resultado-jogo.module';
 
@@ -18,21 +18,51 @@ export class ResultadosComponent implements OnInit {
   resultadosFiltrado: ResultadoJogo[] = [];
   paginasDeResultados: ResultadoJogo[][] = [];
 
+  statusBusca = StatusBusca;
+  statusAtual = StatusBusca.CARREGANDO;
+
   paginaAtual = 0;
   numeroDePaginas = 0;
-  readonly ITENS_POR_PAGINA = 6;
+  readonly ITENS_POR_PAGINA = 8;
 
   private buscadorService = inject(BuscadorService);
 
   ngOnInit(): void {
+    this.buscarJogos();
+  }
+
+  buscarJogos() {
     this.buscadorService.buscarTodosOsResultados('lotofacil').subscribe({
       next: (res) => {
-        if (res.length > 0) {
-          this.resultados = res;
-          this.paginarResultado(res);
-        }
+        this.carregarResultados(res);
+      },
+      error: () => {
+        this.buscarJogoSegundaOpcao();
       },
     });
+  }
+
+  buscarJogoSegundaOpcao() {
+    this.buscadorService.buscarUltimosJogos('lotofacil', 100).subscribe({
+      next: (res) => {
+        this.carregarResultados(res);
+      },
+      error: () => {
+        this.statusAtual = StatusBusca.ERROR;
+      },
+    });
+  }
+
+  private carregarResultados(res: ResultadoJogo[]) {
+    if (res.length > 0) {
+      this.resultados = res.sort(
+        (a, b) => Number(b.concurso) - Number(a.concurso)
+      );
+      this.statusAtual = StatusBusca.CONCLUIDO;
+      this.paginarResultado(res);
+    } else {
+      this.statusAtual = StatusBusca.SEM_RESULTADOS;
+    }
   }
 
   private paginarResultado(resultados: ResultadoJogo[]) {

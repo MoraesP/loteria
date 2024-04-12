@@ -3,16 +3,28 @@
     <span class="titulo">Resultados</span>
   </div>
   <div class="body">
-    @for (resultado of paginasDeResultados[paginaAtual -1]; track $index) {
-    <div class="mb-15">
-      <app-resultado-jogo [resultado]="resultado"></app-resultado-jogo>
-    </div>
-    }
-    <ng-container [ngTemplateOutlet]="paginacao"></ng-container>
+    <ng-container
+      *ngIf="statusAtual === statusBusca.CARREGANDO; else verificarStatus"
+    >
+      CARREGANDO...
+    </ng-container>
   </div>
 </div>
 
-<ng-template #paginacao>
+<ng-template #verificarStatus>
+  <ng-container
+    *ngIf="statusAtual === statusBusca.SEM_RESULTADOS; else resultados"
+  >
+    SEM RESULTADOS
+  </ng-container>
+</ng-template>
+
+<ng-template #resultados>
+  @for (resultado of paginasDeResultados[paginaAtual -1]; track $index) {
+  <div class="mb-15">
+    <app-resultado-jogo [resultado]="resultado"></app-resultado-jogo>
+  </div>
+  }
   <div class="paginacao">
     <mat-icon
       class="botao-pagina"
